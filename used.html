@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Used Cars · Aurum Motors</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  </head>
+  <body>
+    <canvas id="bg-canvas"></canvas>
+    <nav class="nav">
+      <a href="index.html" class="logo"><span class="mark">Æ</span> AURUM</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="buy.html">Buy Cars</a></li>
+        <li><a href="used.html">Used Cars</a></li>
+        <li><a href="sell.html">Sell Car</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="nav-search-wrap">
+          <input type="text" id="nav-search" placeholder="Search vehicles..." autocomplete="off"/>
+          <div class="nav-search-results" id="nav-search-results"></div>
+        </div>
+        <a href="wishlist.html" class="nav-icon-btn" title="Wishlist">♥<span class="badge hidden" data-badge="wishlist">0</span></a>
+        <a href="compare.html" class="nav-icon-btn" title="Compare">⇄<span class="badge hidden" data-badge="compare">0</span></a>
+      </div>
+      <button class="menu-btn">☰</button>
+    </nav>
+
+    <section style="padding-top: 160px">
+      <div class="section-head reveal">
+        <span class="eyebrow">Certified Pre-Owned</span>
+        <h2>Second life. First-class.</h2>
+        <p>Each pre-owned vehicle passes a 270-point inspection and ships with verified service history. Pre-loved, never neglected.</p>
+      </div>
+
+      <div class="filters reveal">
+        <div>
+          <label for="f-condition">Condition</label>
+          <select id="f-condition">
+            <option value="">All Conditions</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+          </select>
+        </div>
+        <div>
+          <label for="f-used-fuel">Fuel Type</label>
+          <select id="f-used-fuel">
+            <option value="">All Fuels</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="used-grid" class="car-grid"></div>
+    </section>
+
+    <footer>
+      <div class="foot-grid">
+        <div>
+          <div class="logo" style="margin-bottom:20px"><span class="mark">Æ</span> AURUM</div>
+          <p>India's premier marketplace for luxury and certified pre-owned vehicles. Established 1998.</p>
+        </div>
+        <div><h4>Showroom</h4><ul><li><a href="buy.html">New Cars</a></li><li><a href="used.html">Pre-Owned</a></li><li><a href="sell.html">Sell Your Car</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="admin.html">Owner Portal</a></li></ul></div>
+        <div><h4>Visit</h4><ul><li>Karol Bagh, Central Delhi</li><li>+91 1800912345</li><li>concierge@aurummotors.in</li></ul></div>
+      </div>
+      <div class="copy">© 2026 AURUM MOTORS · ALL RIGHTS RESERVED</div>
+    </footer>
+
+    <script src="./data.js"></script>
+    <script src="./script.js"></script>
+    <script src="./three-scene.js"></script>
+  </body>
+</html>

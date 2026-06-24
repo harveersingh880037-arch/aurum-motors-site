@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Portal · Aurum Motors</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+      .modal {
+        display: none;
+        position: fixed; inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        z-index: 200;
+        align-items: center; justify-content: center;
+        padding: 20px;
+      }
+      .modal.show { display: flex; animation: rise .3s ease-out; }
+      .modal .panel {
+        background: #0c0c0c;
+        border: 1px solid var(--gold);
+        border-radius: 18px;
+        padding: 40px;
+        max-width: 520px;
+        width: 100%;
+        box-shadow: 0 30px 80px -10px rgba(212, 175, 55, 0.4);
+      }
+      .modal .panel h3 { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 24px; color: var(--gold-bright); }
+      .close-x {
+        background: none; border: 1px solid var(--line); color: var(--text-dim);
+        width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+        font-size: 1.1rem; transition: border-color .2s ease, color .2s ease;
+        position: absolute; top: 16px; right: 16px;
+      }
+      .close-x:hover { border-color: var(--gold); color: var(--gold); }
+    </style>
+  </head>
+  <body>
+    <canvas id="bg-canvas"></canvas>
+    <nav class="nav">
+      <a href="index.html" class="logo"><span class="mark">Æ</span> AURUM</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="buy.html">Buy Cars</a></li>
+        <li><a href="used.html">Used Cars</a></li>
+        <li><a href="sell.html">Sell Car</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="nav-search-wrap">
+          <input type="text" id="nav-search" placeholder="Search vehicles..." autocomplete="off"/>
+          <div class="nav-search-results" id="nav-search-results"></div>
+        </div>
+        <a href="wishlist.html" class="nav-icon-btn" title="Wishlist">♥<span class="badge hidden" data-badge="wishlist">0</span></a>
+        <a href="compare.html" class="nav-icon-btn" title="Compare">⇄<span class="badge hidden" data-badge="compare">0</span></a>
+      </div>
+      <button class="menu-btn">☰</button>
+    </nav>
+
+    <section style="padding-top: 140px">
+      <!-- LOGIN -->
+      <div id="login-card" class="login-card reveal">
+        <h2>Owner Portal</h2>
+        <p class="sub">Restricted Access · admin / 1234</p>
+        <form id="login-form">
+          <div class="field">
+            <label>Username</label>
+            <input id="u" type="text" required autocomplete="off" placeholder="admin" />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input id="p" type="password" required autocomplete="off" placeholder="••••" />
+          </div>
+          <button type="submit" class="btn btn-solid" style="width:100%">Authenticate</button>
+          <div class="err" id="err"></div>
+        </form>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div id="dashboard" style="display:none">
+        <div class="section-head reveal">
+          <span class="eyebrow">Owner Dashboard</span>
+          <h2>Inventory at a glance</h2>
+          <p>Live overview of all listings, pricing, and stock value.</p>
+        </div>
+
+        <div class="dash-stats">
+          <div class="dash-stat reveal"><div class="lab">Total Listings</div><div class="val" id="d-total">0</div></div>
+          <div class="dash-stat reveal delay-1"><div class="lab">New Cars</div><div class="val" id="d-new">0</div></div>
+          <div class="dash-stat reveal delay-2"><div class="lab">Used Cars</div><div class="val" id="d-used">0</div></div>
+          <div class="dash-stat reveal delay-3"><div class="lab">Inventory Value</div><div class="val" id="d-value">₹0</div></div>
+        </div>
+
+        <div class="admin-table-wrap reveal">
+          <div class="head">
+            <h3>All Vehicles</h3>
+            <div style="display:flex;gap:12px">
+              <button class="btn btn-solid" id="add-car-btn">+ Add Car</button>
+              <button class="btn" id="logout-btn">Sign Out</button>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="admin">
+              <thead>
+                <tr><th>ID</th><th>Vehicle</th><th>Brand</th><th>Fuel</th><th>Status</th><th>Price</th></tr>
+              </thead>
+              <tbody id="admin-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADD CAR MODAL -->
+    <div class="modal" id="add-car-modal">
+      <div class="panel" style="position:relative">
+        <button class="close-x" id="close-modal">✕</button>
+        <h3>Add New Vehicle</h3>
+        <form id="add-car-form">
+          <div class="field"><label>Car Name</label><input type="text" name="name" required placeholder="e.g. Bugatti Chiron"/></div>
+          <div class="field"><label>Brand</label><input type="text" name="brand" required placeholder="e.g. Bugatti"/></div>
+          <div class="field"><label>Price (₹)</label><input type="number" name="price" required min="100000"/></div>
+          <div class="field"><label>Fuel Type</label>
+            <select name="fuel" required>
+              <option value="Petrol">Petrol</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Electric">Electric</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-solid" style="width:100%">Add to Inventory</button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div class="foot-grid">
+        <div>
+          <div class="logo" style="margin-bottom:20px"><span class="mark">Æ</span> AURUM</div>
+          <p>India's premier marketplace for luxury and certified pre-owned vehicles. Established 1998.</p>
+        </div>
+        <div><h4>Showroom</h4><ul><li><a href="buy.html">New Cars</a></li><li><a href="used.html">Pre-Owned</a></li><li><a href="sell.html">Sell Your Car</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="admin.html">Owner Portal</a></li></ul></div>
+        <div><h4>Visit</h4><ul><li>Karol Bagh, Central Delhi</li><li>+91 1800912345</li><li>concierge@aurummotors.in</li></ul></div>
+      </div>
+      <div class="copy">© 2026 AURUM MOTORS · ALL RIGHTS RESERVED</div>
+    </footer>
+
+    <script src="./data.js"></script>
+    <script src="./script.js"></script>
+    <script src="./three-scene.js"></script>
+  </body>
+</html>

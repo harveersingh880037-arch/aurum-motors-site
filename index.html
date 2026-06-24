@@ -1,0 +1,160 @@
+luxurycla<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aurum Motors — Where Legends Take luxury</title>
+    <meta name="description" content="India's premier marketplace for luxury and pre-owned vehicles. Curated. Certified. Delivered." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  </head>
+  <body>
+    <canvas id="bg-canvas"></canvas>
+    <!-- NAV -->
+    <nav class="nav">
+      <a href="index.html" class="logo"><span class="mark">Æ</span> AURUM</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="buy.html">Buy Cars</a></li>
+        <li><a href="used.html">Used Cars</a></li>
+        <li><a href="sell.html">Sell Car</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="nav-search-wrap">
+          <input type="text" id="nav-search" placeholder="Search vehicles..." autocomplete="off"/>
+          <div class="nav-search-results" id="nav-search-results"></div>
+        </div>
+        <a href="wishlist.html" class="nav-icon-btn" title="Wishlist">♥<span class="badge hidden" data-badge="wishlist">0</span></a>
+        <a href="compare.html" class="nav-icon-btn" title="Compare">⇄<span class="badge hidden" data-badge="compare">0</span></a>
+      </div>
+      <button class="menu-btn">☰</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-3d-wrap"><canvas id="hero-canvas"></canvas></div>
+      <div class="hero-stage">
+        <div class="hero-rings">
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="core"></div>
+        </div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge"><span class="dot"></span> EST. 1998 · MUMBAI · DELHI · BENGALURU</div>
+        <h1>Where Legends <span class="gilded">Get Luxury</span></h1>
+        <p class="lead">India's most discerning marketplace for luxury, exotic, and certified pre-owned vehicles. Hand-curated. Concierge-delivered. Without compromise.</p>
+        <div class="hero-cta">
+          <a href="buy.html" class="btn btn-solid">Browse Collection</a>
+          <a href="sell.html" class="btn">Sell Your Car</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section style="padding-top:0">
+      <div class="section-head reveal">
+        <span class="eyebrow">By The Numbers</span>
+        <h2>Three decades of trust</h2>
+        <p>Every figure earned the hard way — one handshake, one delivery, one delighted owner at a time.</p>
+      </div>
+      <div class="stats">
+        <div class="stat reveal"><div class="num" data-target="12480" data-suffix="+">0</div><div class="label">Cars Delivered</div></div>
+        <div class="stat reveal delay-1"><div class="num" data-target="99" data-suffix="%">0</div><div class="label">Customer Trust</div></div>
+        <div class="stat reveal delay-2"><div class="num" data-target="27" data-suffix="">0</div><div class="label">Years In Business</div></div>
+        <div class="stat reveal delay-3"><div class="num" data-target="42" data-suffix="">0</div><div class="label">Brands Represented</div></div>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section>
+      <div class="section-head reveal">
+        <span class="eyebrow">The Collection</span>
+        <h2>Featured this season</h2>
+        <p>From hand-built hyper-cars to silent electric monoliths — our most coveted arrivals.</p>
+      </div>
+      <div id="featured-grid" class="car-grid"></div>
+      <div style="text-align:center;margin-top:60px">
+        <a href="buy.html" class="btn">View All Vehicles →</a>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section>
+      <div class="section-head reveal">
+        <span class="eyebrow">The Aurum Standard</span>
+        <h2>Curated. Certified. Concierge.</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature reveal">
+          <div class="ico">✦</div>
+          <h3>Hand-Picked Inventory</h3>
+          <p>Every vehicle on our floor is personally inspected by our master technicians. Provenance, paperwork, and patina — all verified.</p>
+        </div>
+        <div class="feature reveal delay-1">
+          <div class="ico">⌬</div>
+          <h3>270-Point Inspection</h3>
+          <p>Pre-owned doesn't mean second-rate. Our certified vehicles pass a forensic check covering frame, drivetrain, electronics, and aesthetics.</p>
+        </div>
+        <div class="feature reveal delay-2">
+          <div class="ico">◈</div>
+          <h3>White-Glove Delivery</h3>
+          <p>Your vehicle is delivered to your doorstep — covered, climate-controlled, and detailed to showroom finish — anywhere in India.</p>
+        </div>
+        <div class="feature reveal delay-3">
+          <div class="ico">⟡</div>
+          <h3>Lifetime Concierge</h3>
+          <p>From the first key turn onward, our owner-services team handles servicing, registration, insurance, and trade-ins.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="foot-grid">
+        <div>
+          <div class="logo" style="margin-bottom:20px"><span class="mark">Æ</span> AURUM</div>
+          <p>India's premier marketplace for luxury and certified pre-owned vehicles. Established 1998.</p>
+        </div>
+        <div>
+          <h4>Showroom</h4>
+          <ul>
+            <li><a href="buy.html">New Cars</a></li>
+            <li><a href="used.html">Pre-Owned</a></li>
+            <li><a href="sell.html">Sell Your Car</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="admin.html">Owner Portal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <ul>
+            <li>Karol Bagh, Central Delhi</li>
+            <li>+91 1800912345</li>
+            <li>concierge@aurummotors.in</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy">© 2026 AURUM MOTORS · ALL RIGHTS RESERVED · CRAFTED IN MUMBAI</div>
+    </footer>
+
+    <script src="./data.js"></script>
+    <script src="./script.js"></script>
+    <script src="./three-scene.js"></script>
+  </body>
+</html>
